@@ -223,7 +223,7 @@ button {
   background-color: #e05306;
   height: auto;
   padding-top: 15px;
-  padding-bottom: 5px;
+  padding-bottom: 15px;
 }
 
 .menu_text {
@@ -306,9 +306,9 @@ button {
   left: 125px;
 }
 
-.logo {
-  position: relative;
-  left: -83px;
+.logo img {
+  width: 100px;
+  height: 85px;
 }
 
 .round {
@@ -1110,7 +1110,11 @@ hr {
   gap: 30px;
 }
 
-.iconsProject {
+#partners .partnersSection img {
+  width: 200px;
+}
+
+/* .iconsProject {
   width: 80%;
   height: 50%;
   display: flex;
@@ -1118,9 +1122,9 @@ hr {
   align-items: center;
   justify-content: center;
   gap: 30px;
-}
+} */
 
-.iconProject {
+/* .iconProject {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1135,9 +1139,9 @@ hr {
 
   transition: 0.3s;
   border: 1px solid rgb(224, 83, 6);
-}
+} */
 
-.iconTextProject {
+/* .iconTextProject {
   height: 100%;
   width: 100%;
   display: flex;
@@ -1145,7 +1149,7 @@ hr {
   align-items: center;
   justify-content: center;
   text-align: center;
-}
+} */
 
 .projectText {
   display: flex;
@@ -1264,9 +1268,12 @@ hr {
   width: auto !important;
 }
 .header_section .row {
+  display: flex;
+  align-items: center;
   width: auto !important;
 }
-.header_section .container {
+
+.header_section .row .header_section .container {
   width: 100% !important;
 }
 .row .col-md-3 .logo {
