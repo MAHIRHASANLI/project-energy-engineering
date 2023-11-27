@@ -218,23 +218,50 @@ button {
 }
 
 .header_section {
-  width: 100%;
-  float: left;
   background-color: #e05306;
-  height: auto;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  /* height: 80px; */
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  position: sticky;
+  top: 0;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  z-index: 999;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 }
 
-.menu_text {
-  width: 100%;
-  float: left;
+.header_section .header_section-item {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header_section .logo {
+  margin: 0;
+  padding: 0;
+}
+
+.header_section .naw-hamburger {
+  display: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header_section .toggle_menu {
+  width: 35px;
+  height: 25px;
+}
+.logo-mobile {
+  display: none;
 }
 
 .menu_text li {
   float: left;
-  padding-right: 10px;
-  padding-left: 10px;
+  padding-right: 15px;
+  padding-left: 15px;
   font-size: 18px;
   color: #ffffff;
 }
@@ -250,7 +277,7 @@ button {
 
 .banner_section {
   width: 100%;
-  float: left;
+  /* float: left; */
   background-color: #e05306;
   height: auto;
 }
@@ -301,9 +328,8 @@ button {
 }
 
 .toggle_menu {
-  top: -15px;
-  position: relative;
-  left: 125px;
+  width: 40px;
+  cursor: pointer;
 }
 
 .logo img {
@@ -312,6 +338,7 @@ button {
 }
 
 .round {
+  padding-top: 15px;
   width: 100%;
   float: left;
   padding-left: 20px;
@@ -334,6 +361,7 @@ button {
 .taital_main {
   width: 100%;
   float: left;
+  padding-left: 10px;
   margin-top: 80px;
 }
 
@@ -416,9 +444,9 @@ button {
 }
 
 .about_taital {
-  width: 63%;
+  width: 90%;
   float: right;
-  margin-top: 80px;
+  margin-top: 70px;
   padding: 20px 20px;
 }
 
@@ -491,7 +519,7 @@ button {
   font-size: 18px;
   color: #090a0b;
   margin-left: 0px;
-  text-align: center;
+  text-align: center !important;
 }
 
 .bt_main {
@@ -880,7 +908,7 @@ textarea#comment.massage-bt::placeholder {
   background-color: #008cba;
 }
 
-.container:hover .overlay {
+.header_section-item:hover .overlay {
   opacity: 1;
 }
 
@@ -923,10 +951,10 @@ textarea#comment.massage-bt::placeholder {
   transition: 0.5s;
 }
 
-.menu_text {
+/* .menu_text {
   width: 100%;
   float: left;
-}
+} */
 
 .overlay .closebtn {
   position: absolute;
@@ -1048,12 +1076,12 @@ hr {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-
   flex-direction: column !important;
 }
 
 .containerSevices h3 {
   color: white !important;
+  text-align: center !important;
 }
 
 .serviceIcon {
@@ -1062,7 +1090,7 @@ hr {
   cursor: pointer;
   display: flex;
   flex-direction: column;
-
+  align-items: center;
   justify-content: space-between;
 }
 
@@ -1101,7 +1129,7 @@ hr {
 }
 
 #partners {
-  height: 680px;
+  height: 450px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -1110,8 +1138,32 @@ hr {
   gap: 30px;
 }
 
+#partners .partnersSection {
+  padding-top: 40px;
+}
+
+#partners .partnersSection .partnersSection-item {
+  width: 150px;
+}
+
 #partners .partnersSection img {
-  width: 200px;
+  width: 100%;
+}
+
+#partners .partnersSection .portners-count {
+  padding-top: 5px;
+  text-align: center;
+}
+
+.portners-count h6 {
+  font-weight: 500;
+  font-size: 14px;
+  transition: linear 0.3s all;
+  font-family: Raleway;
+}
+
+.partnersSection .partnersSection-item:hover h6 {
+  color: #e05306;
 }
 
 /* .iconsProject {
@@ -1161,6 +1213,7 @@ hr {
 }
 
 .projectText h2 {
+  margin-top: 50px;
   font-size: 2rem;
   font-weight: bold;
 }
@@ -1267,15 +1320,7 @@ hr {
 .row .col-md-3 {
   width: auto !important;
 }
-.header_section .row {
-  display: flex;
-  align-items: center;
-  width: auto !important;
-}
 
-.header_section .row .header_section .container {
-  width: 100% !important;
-}
 .row .col-md-3 .logo {
   width: auto !important;
   display: flex;

@@ -1,27 +1,27 @@
 $('.partnersSection').owlCarousel({
-    loop: true,
+    nav: false, // Show next and prev buttons 
+    smartSpeed: 10000,
     margin: 10,
-    nav: false,
-    dots: false,
+    dotsSpeed: 2000,
+    dragEndSpeed: 1000,
+    singleItem: true,
+    animateIn: 'fadeIn',
+    animateOut: 'fadeOut',
+    pagination: false,
     autoplay: true,
     autoplayTimeout: 4000,
-    autoplayHoverPause: true,
+    autoplayHoverPause: false,
+    loop: true,
+
     responsive: {
         0: {
-            items: 1
+            items: 2
         },
         600: {
-            items: 2
+            items: 3
         },
         1000: {
             items: 4
         }
     }
-})
-
-$('.play').on('click', function () {
-    owl.trigger('play.owl.autoplay', [500000000])
-})
-$('.stop').on('click', function () {
-    owl.trigger('stop.owl.autoplay')
-})
+});

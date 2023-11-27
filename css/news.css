@@ -78,6 +78,7 @@
 }
 
 .details {
+  padding-top: 100px;
   height: 100%;
   width: 100%;
   background-color: white;
@@ -91,7 +92,7 @@
 
 .details button {
   position: fixed;
-  top: 30px;
+  top: 120px;
   right: 30px;
   height: 40px;
   width: 40px;
@@ -191,4 +192,31 @@
 .arrow:hover {
   color: rgb(224, 83, 6);
   transition: 0.3s;
+}
+
+@media screen and (max-width: 550px) {
+  .details .newsDetailsContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  .newsDetailsContainer img {
+    width: 100%;
+  }
+  .newsTextCont {
+    width: 100%;
+    height: 100%;
+    display: block;
+    padding-left: 20px;
+  }
+  .details button {
+    top: 70px;
+    right: 15px;
+  }
+  #news {
+    height: 450px;
+  }
+
+  .news {
+    height: 300px;
+  }
 }

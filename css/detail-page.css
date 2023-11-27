@@ -55,8 +55,8 @@ body {
 }
 
 .pages-photos img {
-  max-width: 402px;
-  height: 402px;
+  max-width: 302px;
+  height: 302px;
   object-fit: cover;
 }
 
