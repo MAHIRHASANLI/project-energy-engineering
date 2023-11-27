@@ -1,5 +1,5 @@
 #news {
-  height: 600px;
+  height: 630px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -22,7 +22,7 @@
   font-size: 2rem;
   font-weight: bold;
   color: rgba(26, 24, 36, 0.8);
-  padding: 0 !important;
+  margin-bottom: 20px;
 }
 
 .newsCards {
@@ -88,6 +88,7 @@
   align-items: center;
   top: 0;
   overflow-y: scroll;
+  z-index: 999;
 }
 
 .details button {

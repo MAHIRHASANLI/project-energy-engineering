@@ -219,12 +219,6 @@ button {
 
 .header_section {
   background-color: #e05306;
-  /* height: 80px; */
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
-  position: sticky;
-  top: 0;
   padding-top: 10px;
   padding-bottom: 5px;
   z-index: 999;
@@ -439,7 +433,7 @@ button {
 .about_section {
   width: 100%;
   float: left;
-  background-color: #000;
+  background-color: white;
   margin-top: 70px;
 }
 
@@ -456,6 +450,7 @@ button {
   font-size: 40px;
   color: #ffffff;
   font-weight: bold;
+  color: black;
 }
 
 .long_text {
@@ -464,19 +459,21 @@ button {
   font-size: 16px;
   color: #ffffff;
   margin-left: 0px;
+  color: black;
 }
 
 .about_bt a {
-  width: 40%;
+  width: 200px;
+  /* width: 120px !important; */
 
   font-size: 16px;
   color: #ffffff;
   background-color: #e05306;
-  height: 50px;
+  border: 1px solid #e05306;
   font-weight: bold;
   margin-top: 40px;
   text-align: center;
-  padding-top: 12px;
+  padding: 13px 0;
   display: inline-block;
 }
 
@@ -486,7 +483,7 @@ button {
 }
 
 .about_bt a:hover {
-  color: #000000;
+  color: #e05306;
   background-color: #ffffff;
 }
 
@@ -1129,7 +1126,7 @@ hr {
 }
 
 #partners {
-  height: 450px;
+  height: 500px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -1330,11 +1327,7 @@ hr {
 .toggle_menu {
   top: -3px;
 }
-.about_bt a {
-  width: 120px !important;
 
-  height: 50px !important;
-}
 .about_img {
   height: 100% !important;
 }

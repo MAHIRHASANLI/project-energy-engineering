@@ -8,7 +8,7 @@ body {
 }
 
 .header-area a:hover {
-  color: #e05306;
+  color: #333;
 }
 
 .header-area {
@@ -16,6 +16,7 @@ body {
   background: linear-gradient(to top, #0000006e, #0001007f),
     url("https://www.onisep.fr/var/onisep/storage/images/3/2/8/5/9565823-5-fre-FR/4d04693191ae-ingenieur-e-du-BTP.jpg")
       center/cover;
+  background-position: center;
   height: 45vh;
   width: 100%;
   z-index: 1000;
