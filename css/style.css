@@ -1285,6 +1285,13 @@ hr {
 .footer_section {
   margin-top: 0 !important;
 }
+.footer-main {
+  /* display: flex;
+  justify-content: space-between;
+  align-items: center; */
+}
+.footer-center iframe {
+}
 .banner_section .more {
   width: 100px !important;
   background-color: transparent !important;
@@ -1337,4 +1344,71 @@ hr {
 }
 .iconsProject {
   margin-top: 20px !important;
+}
+
+/* AEEK Number */
+#aeekInNumber {
+  min-height: 500px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.aeekTitle {
+  width: 100%;
+  padding-top: 30px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.aeekTitle h2 {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  color: rgba(26, 24, 36, 0.8);
+  margin-bottom: 20px;
+}
+
+.aeekContainer {
+  padding-bottom: 50px;
+  text-align: center;
+}
+
+.aeekContainer .aeek-item {
+  margin-top: 30px;
+  border: 1px solid white;
+  border-bottom: 2px solid #e05306;
+  cursor: pointer;
+  transition: 0.3s all;
+  padding: 20px;
+}
+
+.aeekContainer .aeek-item:hover {
+  border: 1px solid #e05306;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.aeekContainer .aeek-item p,
+.aeek-item span {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-family: Raleway;
+}
+
+.aeek-item span {
+  margin: 0;
+  padding: 0;
+  color: #e05306;
+  font-size: 34px;
 }

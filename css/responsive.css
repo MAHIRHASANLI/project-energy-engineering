@@ -85,6 +85,9 @@
   #collapseFilter.d-md-block {
     padding: 30px 0px;
   }
+  #partners .partnersSection .partnersSection-item {
+    width: 140px;
+  }
 }
 
 /*------------------------------------------------------------------- 599px x 280px ---------------------------------------------------------------------*/
@@ -946,5 +949,8 @@
   }
   .arrow {
     display: none !important;
+  }
+  #partners .partnersSection .partnersSection-item {
+    width: 120px;
   }
 }
