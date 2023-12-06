@@ -23991,6 +23991,9 @@ dl li {
 
 /* Layouts */
 @media (min-width: 992px) {
+  .modal-content {
+    width: 80%;
+  }
   .sidebar-icon-only .navbar .navbar-brand-wrapper {
     width: 70px;
   }
@@ -24206,4 +24209,118 @@ img.logo-img {
 .btn {
   height: 30px;
   color: white;
+}
+
+/* modal */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding-top: 10px;
+  padding: 40px;
+  border: 1px solid #888;
+  width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 40px;
+  padding: 0;
+  margin: 0;
+  font-weight: bold;
+  text-align: end;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-content input {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #3333;
+  font-size: 14px;
+}
+
+.modal-content input:active,
+.modal-content input:focus {
+  border: 1px solid #e05306;
+}
+
+.modal-content input::placeholder {
+  font-size: 14px;
+}
+
+.modal-content button {
+  padding: 12px;
+  color: white;
+  background: #e05306;
+  border: 1px solid;
+  border-radius: 5px;
+  margin: 10px 0;
+  transition: 0.4s ease-in-out;
+}
+
+.modal-content button:hover {
+  color: #e05306;
+  background: #ffff;
+}
+
+@media screen and (max-width: 1000px) {
+  .modal-content {
+    width: 80%;
+    padding-top: 10px;
+    padding: 30px;
+  }
+  .close {
+    font-size: 36px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .modal-content {
+    width: 90%;
+    padding-top: 5px;
+    padding: 15px;
+  }
+  .close {
+    font-size: 30px;
+  }
+  .modal-content input {
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .modal-content button {
+    padding: 8px;
+    margin: 10px 0;
+    font-size: 12px;
+  }
 }

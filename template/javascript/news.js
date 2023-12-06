@@ -1,5 +1,10 @@
 const newsTableTbody = document.querySelector(".news-table--tbody");
 
+// Get the modal
+var modal = document.getElementById("myModal");
+var span = document.getElementsByClassName("close")[0];
+
+
 let newsObjects = [
     { id: 1, title: "Xəbər 1", text: "This is the text for news 1.", img: "../images/technology-trend-freepik-1647963838.jpg", date: "10/06/2023" },
     { id: 2, title: "Xəbər 2", text: "This is the text for news 2.", img: "../images/Brad-Blog-Aus-Header-scaled.jpg", date: "10/06/2023" },
@@ -37,9 +42,24 @@ deleteBtn.forEach((btn) => {
 })
 
 
-const updateBtn = document.querySelectorAll(".update")
+
+var updateBtn = document.querySelectorAll(".update");
 updateBtn.forEach((btn) => {
     btn.addEventListener("click", function () {
-
+        modal.style.display = "block";
+        document.getElementsByClassName("image")[0].value = this.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.children[0].getAttribute("src");
+        document.getElementsByClassName("title")[0].value = this.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
+        document.getElementsByClassName("text")[0].value = this.parentElement.previousElementSibling.previousElementSibling.textContent;
+        document.getElementsByClassName("date")[0].value = this.parentElement.previousElementSibling.textContent;
     })
+})
+
+span.addEventListener("click", function () {
+    modal.style.display = "none";
+})
+
+window.addEventListener("click", function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
 })
