@@ -22935,9 +22935,12 @@ dl li {
 .dataTables_wrapper .dataTable thead .sorting_asc_disabled:after,
 .dataTables_wrapper .dataTable thead .sorting_desc_disabled:before,
 .dataTables_wrapper .dataTable thead .sorting_desc_disabled:after {
-  line-height: 2.5;
   font-family: Material Design Icons;
-  font-size: 0.65rem;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 5px;
+  transition: linear 0.3s all;
+  color: #e05306;
 }
 
 .dataTables_wrapper .dataTable thead .sorting:before,
@@ -23066,10 +23069,6 @@ dl li {
 
 .auth .brand-logo {
   margin-bottom: 2rem;
-}
-
-.auth .brand-logo img {
-  width: 150px;
 }
 
 .auth form .form-group {
@@ -23286,7 +23285,7 @@ dl li {
 .sidebar .nav .nav-item.active > .nav-link i,
 .sidebar .nav .nav-item.active > .nav-link .menu-title,
 .sidebar .nav .nav-item.active > .nav-link .menu-arrow {
-  color: #4d83ff;
+  color: #e05306;
 }
 
 .sidebar .nav:not(.sub-menu) {
@@ -23379,7 +23378,7 @@ dl li {
 }
 
 .navbar .navbar-brand-wrapper {
-  background: #ffffff;
+  background: #e05306;
   border-bottom: 1px solid #e3e3e3;
   transition: width 0.25s ease, background 0.25s ease;
   -webkit-transition: width 0.25s ease, background 0.25s ease;
@@ -23468,7 +23467,7 @@ dl li {
 }
 
 .navbar .navbar-menu-wrapper {
-  background: #ffffff;
+  background: #e05306;
   transition: width 0.25s ease;
   -webkit-transition: width 0.25s ease;
   -moz-transition: width 0.25s ease;
@@ -23528,7 +23527,7 @@ dl li {
 }
 
 .navbar .navbar-menu-wrapper .navbar-nav .nav-item.nav-search .input-group {
-  background: #ececec;
+  background: white;
   border-radius: 4px;
   padding: 0 0.75rem;
 }
@@ -23733,8 +23732,12 @@ dl li {
   .nav-profile-name {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
-  color: #4a4a4a;
+  color: white;
   font-weight: 500;
+}
+
+.nav-profile-name::after {
+  color: white !important;
 }
 
 @media (max-width: 767px) {
@@ -24194,4 +24197,13 @@ dl li {
 
 a {
   text-decoration: none;
+}
+
+img.logo-img {
+  height: 40px !important;
+  width: 60px !important;
+}
+.btn {
+  height: 30px;
+  color: white;
 }
