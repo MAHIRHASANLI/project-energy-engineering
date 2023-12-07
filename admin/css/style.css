@@ -21730,12 +21730,34 @@ code {
   padding-top: 1rem;
 }
 
-.card .card-title {
+.card-body-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-body-head.card-title {
   color: #4a4a4a;
   margin-bottom: 1.5rem;
   text-transform: uppercase;
   font-size: 0.875rem;
   font-weight: bold;
+}
+
+.card-body-head button.post-data--btn {
+  background: #e05306;
+  padding: 10px 10px;
+  color: white;
+  border-radius: 5px;
+  border: 1px solid #e05306;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: 0.3s linear;
+}
+.card-body-head button.post-data--btn:hover {
+  color: black;
 }
 
 .card .card-subtitle {
@@ -24242,6 +24264,10 @@ img.logo-img {
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
+#myModal {
+  transition: 0.4s linear;
+}
+
 /* The Close Button */
 .close {
   color: #aaaaaa;
@@ -24266,6 +24292,7 @@ img.logo-img {
   border-radius: 5px;
   border: 1px solid #3333;
   font-size: 14px;
+  font-family: inherit;
 }
 
 .modal-content input:active,
@@ -24275,6 +24302,9 @@ img.logo-img {
 
 .modal-content input::placeholder {
   font-size: 14px;
+  font-weight: 300;
+  color: #a4a4a4;
+  font-family: inherit;
 }
 
 .modal-content button {

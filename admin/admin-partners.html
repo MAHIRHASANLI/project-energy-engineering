@@ -129,7 +129,10 @@
             <div class="col-md-12 stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Recent Purchases</p>
+                  <div class="card-body-head">
+                    <p class="card-title">Recent Purchases</p>
+                    <button class="post-data--btn">Add Partner</button>
+                  </div>
                   <div class="table-responsive">
                     <table id="recent-purchases-listing" class="table">
                       <thead>
@@ -155,9 +158,9 @@
           <!-- Modal content -->
           <div class="modal-content">
             <span class="close">&times;</span>
-            <input class="name" type="text" placeholder="Update Pertners name" title="add text">
-            <input class="image" type="text" title="add file">
-            <button title="Submit">Submit</button>
+            <input class="name" type="text" placeholder="add pertners name" title="add text">
+            <input class="image" type="text" placeholder="add pertners logo" title="add file">
+            <button title="Submit" type="button" class="modal-btn">Submit</button>
           </div>
         </div>
 
@@ -166,7 +169,7 @@
   </div>
 
 
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- Partner, Dashboard -Table -->
   <script src="javascript/responsive-table-sorted.js"></script>
   <!-- Plugin js for this page-->
