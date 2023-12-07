@@ -5,9 +5,8 @@ var span = document.getElementsByClassName("close")[0];
 // Submit -MODAL
 const modalBtn = document.querySelector(".modal-btn");
 
-// const name = document.querySelector(".name")
 
-const partnerArray = [
+let partnerArray = [
     {
         id: 1,
         name: "Azerbaijan Technical University",
@@ -31,28 +30,56 @@ const partnerArray = [
 
 ]
 
-
-const fethcData = () => {
-    partnerArray.forEach(({ name, img, id }) => {
-        partnerTableTbody.innerHTML +=
-            `<tr id="${id}">
-    <td>
-        <img src="${img}" alt="${name}" id="sss"/>
-    </td>
-    <td>${name}</td>
-    <td>
-        <button type="button" class="btn btn-success update">Update</button>
-    </td>
-    <td>
-        <button type="button" class="btn btn-danger remove">Delete</button>
-    </td>
+// addDateUI - UI 
+const addDateUI = (newPartner) => {
+    partnerTableTbody.innerHTML +=
+        `<tr id="${newPartner.id}">
+       <td>
+        <img src="${newPartner.img}" alt="${newPartner.name}"/>
+       </td>
+       <td>${newPartner.name}</td>
+       <td>
+        <button type="button" class="btn btn-success update-btn">Update</button>
+       </td>
+       <td>
+        <button type="button" class="btn btn-danger remove-btn">Delete</button>
+       </td>
     </tr>`
+}
+
+// postAndUpdateSwal - Swall gosterilmesi
+const postAndUpdateSwal = (newPartner) => {
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: `<span style="color:#E05306;">${newPartner.name}</span> - added successfully!`,
+        showConfirmButton: false,
+        timer: 1500
     })
 }
-fethcData();
+
+// document.addEventListener("DOMContentLoaded", () => {
+// const fethcData = () => {
+partnerArray.forEach((partner) => {
+    addDateUI(partner)
+})
+// }
+// fethcData();
+// })
+
+// Modal baglanmasi
+span.addEventListener("click", function () {
+    modal.style.display = "none";
+});
+
+window.addEventListener("click", function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+});
 
 // Delete - Data;
-const deleteBtn = document.querySelectorAll(".remove");
+const deleteBtn = document.querySelectorAll(".remove-btn");
 deleteBtn.forEach((btn) => {
     btn.addEventListener("click", function () {
         const thisId = this.parentElement.parentElement.getAttribute("id");
@@ -78,8 +105,18 @@ deleteBtn.forEach((btn) => {
     })
 });
 
-// Update - Data;
-const updateBtn = document.querySelectorAll(".update");
+// Post - // Modal acilmasi;
+const postBtn = document.querySelector(".post-data--btn");
+postBtn.addEventListener("click", function () {
+    document.getElementsByClassName("name")[0].value = "";
+    document.getElementsByClassName("image")[0].value = "";
+    modalBtn.classList.add("post")
+    modalBtn.classList.remove("update")
+    modal.style.display = "block";
+});
+
+// Update - // Modal acilmasi;
+const updateBtn = document.querySelectorAll(".update-btn");
 updateBtn.forEach((btn) => {
     btn.addEventListener("click", function () {
         document.getElementsByClassName("name")[0].value = this.parentElement.previousElementSibling.textContent;
@@ -91,68 +128,42 @@ updateBtn.forEach((btn) => {
     })
 });
 
-span.addEventListener("click", function () {
-    modal.style.display = "none";
-});
 
-window.addEventListener("click", function (event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-});
-
-// Post - Data;
-const postBtn = document.querySelector(".post-data--btn");
-postBtn.addEventListener("click", function () {
-    document.getElementsByClassName("name")[0].value = "";
-    document.getElementsByClassName("image")[0].value = "";
-    modalBtn.classList.add("post")
-    modalBtn.classList.remove("update")
-    modal.style.display = "block";
-});
-
-// Submit -MODAL
-
+// Submit -MODAL - Update and Post
 modalBtn.addEventListener("click", function () {
     if (modalBtn.className.includes("post")) {
-        const newDate = {
+        const newPartner = {
             id: Math.floor(Math.random()),
             name: document.getElementsByClassName("name")[0].value,
             img: document.getElementsByClassName("image")[0].value
         }
-        partnerArray.push(newDate);
+        addDateUI(newPartner);
+        postAndUpdateSwal(newPartner);
         modal.style.display = "none";
-        fethcData();
-        Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: `${newDate.name} added successfully!`,
-            showConfirmButton: false,
-            timer: 1500
-        })
-        return
     };
     if (modalBtn.className.includes("update")) {
-        const newDate = {
+        var newPartner = {
             name: document.getElementsByClassName("name")[0].value,
             img: document.getElementsByClassName("image")[0].value
         };
-        const findData = partnerArray.find((partner) => partner.id == modalBtn.getAttribute("id"));
-        findData.name = document.getElementsByClassName("name")[0].value;
-        findData.img = document.getElementsByClassName("image")[0].value;
-
+        // const IdData = modalBtn.getAttribute("id")
+        // const arr = partnerArray.find((item) => Number(item.id) === Number(IdData))
+        // arr.name = newPartner.name;
+        // console.log(partnerArray);
+        const updateTask = partnerArray.map((item) => {
+            const IdData = modalBtn.getAttribute("id")
+            if (Number(item.id) === Number(IdData)) {
+                return { id: item.id, name: newPartner.name, img: newPartner.img }
+            };
+            return item;
+        });
+        updateTask.forEach((partner) => {
+            addDateUI(partner);
+        })
         // partnerArray.push(newDate);
-        fethcData();
         // console.log(partnerArray);
         modal.style.display = "none";
-        Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: `${newDate.name} update successfully!`,
-            showConfirmButton: false,
-            timer: 1500
-        })
-        return
+        postAndUpdateSwal(newPartner);
     };
     // else { console.log("error!! (Post ve Update Olunmadi)") };
 });
