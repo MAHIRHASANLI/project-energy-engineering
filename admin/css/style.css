@@ -12822,9 +12822,6 @@ fieldset:disabled .btn {
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
-  position: fixed;
-  left: 0;
-  top: 60px;
 }
 
 .nav-link {
@@ -13138,6 +13135,12 @@ fieldset:disabled .btn {
 }
 
 @media (min-width: 992px) {
+  .sidebar-offcanvas > .nav {
+    position: fixed;
+    left: 0;
+    top: 60px;
+  }
+
   .navbar-expand-lg {
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -23775,7 +23778,7 @@ dl li {
 .navbar .nav-profile-name:hover {
   color: white;
   border: 1px solid #e05306;
-  background-color:#e05306
+  background-color: #e05306;
 }
 
 .nav-profile-name::after {
@@ -24377,5 +24380,5 @@ img.logo-img {
   }
 }
 .input-group {
-  background: #ececec;
+  background-color: #ececec !important;
 }
