@@ -11642,7 +11642,7 @@ fieldset:disabled .btn {
 .btn-primary:active,
 .btn-primary.active,
 .show > .btn-primary.dropdown-toggle {
-  color: #000;
+  color: white;
   background-color: #719cff;
   border-color: #5f8fff;
 }
@@ -12822,6 +12822,9 @@ fieldset:disabled .btn {
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
+  position: fixed;
+  left: 0;
+  top: 60px;
 }
 
 .nav-link {
@@ -22288,6 +22291,7 @@ code {
   border-bottom: 0;
   font: normal normal normal 24px/1 "Material Design Icons";
   content: "\F140";
+  color: white;
   width: auto;
   height: auto;
   vertical-align: middle;
@@ -23091,6 +23095,8 @@ dl li {
 
 .auth .brand-logo {
   margin-bottom: 2rem;
+  text-align: center;
+  padding: 10px 0;
 }
 
 .auth form .form-group {
@@ -23325,7 +23331,7 @@ dl li {
 
 .sidebar .nav:not(.sub-menu) > .nav-item:hover > .nav-link {
   background: transparent;
-  color: #E05306;
+  color: #e05306;
 }
 
 .sidebar .nav.sub-menu {
@@ -23489,7 +23495,7 @@ dl li {
 }
 
 .navbar .navbar-menu-wrapper {
-  background: #e05306;
+  background: white;
   transition: width 0.25s ease;
   -webkit-transition: width 0.25s ease;
   -moz-transition: width 0.25s ease;
@@ -23758,6 +23764,20 @@ dl li {
   font-weight: 500;
 }
 
+.navbar .nav-profile-name {
+  color: #e05306;
+  border: 1px solid #e05306;
+  border-radius: 8px;
+  padding: 5px 25px;
+  transition: 0.3s linear;
+}
+
+.navbar .nav-profile-name:hover {
+  color: white;
+  border: 1px solid #e05306;
+  background-color:#e05306
+}
+
 .nav-profile-name::after {
   color: white !important;
 }
@@ -23778,7 +23798,9 @@ dl li {
   .navbar-nav
   .nav-item.nav-profile
   .nav-link::after {
-  color: #4a4a4a;
+  color: black;
+  font-size: 22px;
+  margin-left: 5px;
 }
 
 .navbar .navbar-menu-wrapper .navbar-nav .nav-item.dropdown .dropdown-menu {
@@ -24353,4 +24375,7 @@ img.logo-img {
     margin: 10px 0;
     font-size: 12px;
   }
+}
+.input-group {
+  background: #ececec;
 }

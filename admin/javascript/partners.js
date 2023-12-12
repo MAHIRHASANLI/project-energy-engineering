@@ -1,3 +1,19 @@
+const isLoggedIn = true; // Bu değeri oturum durumuna göre güncelleyin
+
+// Sayfa yüklendiğinde kontrolü yap
+window.onload = function () {
+    checkLoginStatus();
+};
+
+// Oturum durumunu kontrol et
+function checkLoginStatus() {
+    if (!isLoggedIn) {
+        // Kullanıcı giriş yapmamışsa, login sayfasına yönlendir
+        window.location.href = '/admin/login/login.html'; // Yönlendirme yapılacak sayfanın yolunu belirtin
+    }
+}
+
+
 const partnerTableTbody = document.querySelector(".partner-table--tbody");
 // Get the modal
 var modal = document.getElementById("myModal");
@@ -47,8 +63,12 @@ const addDateUI = (newPartner) => {
     </tr>`
 }
 
+partnerArray.forEach((partner) => {
+    addDateUI(partner)
+})
+
 // postAndUpdateSwal - Swall gosterilmesi
-const postAndUpdateSwal = (newPartner) => {
+const SwalFire = (newPartner) => {
     Swal.fire({
         position: 'center',
         icon: 'success',
@@ -58,25 +78,6 @@ const postAndUpdateSwal = (newPartner) => {
     })
 }
 
-// document.addEventListener("DOMContentLoaded", () => {
-// const fethcData = () => {
-partnerArray.forEach((partner) => {
-    addDateUI(partner)
-})
-// }
-// fethcData();
-// })
-
-// Modal baglanmasi
-span.addEventListener("click", function () {
-    modal.style.display = "none";
-});
-
-window.addEventListener("click", function (event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-});
 
 // Delete - Data;
 const deleteBtn = document.querySelectorAll(".remove-btn");
@@ -94,7 +95,7 @@ deleteBtn.forEach((btn) => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                this.parentElement.parentElement.remove()
+                this.parentElement.parentElement.remove();
                 Swal.fire({
                     title: "Deleted!",
                     text: `${thisDataName} - file has been deleted.`,
@@ -133,23 +134,21 @@ updateBtn.forEach((btn) => {
 modalBtn.addEventListener("click", function () {
     if (modalBtn.className.includes("post")) {
         const newPartner = {
-            id: Math.floor(Math.random()),
+            id: Math.round(Math.random() * 99),
             name: document.getElementsByClassName("name")[0].value,
             img: document.getElementsByClassName("image")[0].value
         }
         addDateUI(newPartner);
-        postAndUpdateSwal(newPartner);
+        SwalFire(newPartner);
         modal.style.display = "none";
-    };
-    if (modalBtn.className.includes("update")) {
-        var newPartner = {
+    }
+    else if (modalBtn.className.includes("update")) {
+        const newPartner = {
+            id: modalBtn.getAttribute("id"),
             name: document.getElementsByClassName("name")[0].value,
             img: document.getElementsByClassName("image")[0].value
         };
-        // const IdData = modalBtn.getAttribute("id")
-        // const arr = partnerArray.find((item) => Number(item.id) === Number(IdData))
-        // arr.name = newPartner.name;
-        // console.log(partnerArray);
+
         const updateTask = partnerArray.map((item) => {
             const IdData = modalBtn.getAttribute("id")
             if (Number(item.id) === Number(IdData)) {
@@ -157,13 +156,22 @@ modalBtn.addEventListener("click", function () {
             };
             return item;
         });
-        updateTask.forEach((partner) => {
-            addDateUI(partner);
-        })
-        // partnerArray.push(newDate);
-        // console.log(partnerArray);
+        partnerTableTbody.innerHTML = '';
+        updateTask.forEach((partner) => addDateUI(partner));
         modal.style.display = "none";
-        postAndUpdateSwal(newPartner);
-    };
-    // else { console.log("error!! (Post ve Update Olunmadi)") };
+        // swall
+        SwalFire(newPartner);
+    }
+    else console.error('Invalid data');
+});
+
+// Modal baglanmasi
+span.addEventListener("click", function () {
+    modal.style.display = "none";
+});
+
+window.addEventListener("click", function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
 });

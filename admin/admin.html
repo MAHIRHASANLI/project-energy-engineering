@@ -10,7 +10,9 @@
   <!-- Dashboard, Partners - Table -CSS-->
   <!-- <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">-->
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Css FILE -->
   <link rel="stylesheet" href="css/materialdesignicons.min.css">
   <!-- <link rel="stylesheet" href="css/dataTables.bootstrap4.css"> -->
@@ -53,9 +55,9 @@
         <ul class="navbar-nav navbar-nav-right">
 
           <li class="nav-item nav-profile dropdown">
+            <a href="login/login.html" class="nav-profile-name">Login</a>
             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
-              <img src="images/faces/face5.jpg" alt="profile" />
-              <span class="nav-profile-name">Louis Barnett</span>
+
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item">
@@ -133,9 +135,9 @@
             <div class="col-md-7 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Cash deposits</p>
-                  <p class="mb-4">To start a blog, think of a topic about and first brainstorm party is ways to write
-                    details</p>
+                  <h4 class="card-title">Viewing statistics</h4>
+                  <!-- <p class="mb-4">To start a blog, think of a topic about and first brainstorm party is ways to write
+                    details</p> -->
                   <div id="cash-deposits-chart-legend" class="d-flex justify-content-center pt-3"></div>
                   <canvas id="cash-deposits-chart"></canvas>
                 </div>
@@ -144,11 +146,12 @@
             <div class="col-md-5 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Total sales</p>
-                  <h1>$ 28835</h1>
-                  <h4>Gross sales over the years</h4>
-                  <p class="text-muted">Today, many people rely on computers to do homework, work, and create or store
-                    useful information. Therefore, it is important </p>
+                  <h5 class="card-title">Total viewing statistics for the month</h5>
+                  <h2><i class="fa-solid fa-eye"></i>&nbsp;<span class="total-viewing-month"></span> </h2>
+
+                  <h5 class="card-title">Total viewing statistics for the year</h5>
+                  <h2><i class="fa-solid fa-eye"></i>&nbsp;<span class="total-viewing-year"></span> </h2>
+
                   <div id="total-sales-chart-legend"></div>
                 </div>
                 <canvas id="total-sales-chart"></canvas>
@@ -156,6 +159,7 @@
             </div>
           </div>
           <!-- ///Budu -->
+
         </div>
       </div>
       <!-- main-panel ends -->
@@ -164,7 +168,8 @@
   </div>
 
 
-
+  <!-- Admin-Dashboard-Statistic -->
+  <script src="javascript/admin-dashboard.js"></script>
   <!-- Partner, Dashboard -Table -->
   <script src="javascript/tabs.js"></script>
   <script src="javascript/responsive-table-sorted.js"></script>

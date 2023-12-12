@@ -1,3 +1,6 @@
+
+
+
 (function ($) {
   'use strict';
   $(function () {
@@ -5,10 +8,10 @@
     if ($('#cash-deposits-chart').length) {
       var cashDepositsCanvas = $("#cash-deposits-chart").get(0).getContext("2d");
       var data = {
-        labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8"],
+        labels: ["1", "2", "3", "4"],
         datasets: [
           {
-            label: 'Returns',
+            label: 'Viewing statistics by month',
             data: [27, 35, 30, 40, 52, 48, 54, 46, 70],
             borderColor: [
               '#ff4747'
@@ -17,26 +20,6 @@
             fill: false,
             pointBackgroundColor: "#fff"
           },
-          {
-            label: 'Sales',
-            data: [29, 40, 37, 48, 64, 58, 70, 57, 80],
-            borderColor: [
-              '#4d83ff'
-            ],
-            borderWidth: 2,
-            fill: false,
-            pointBackgroundColor: "#fff"
-          },
-          {
-            label: 'Loss',
-            data: [90, 62, 80, 63, 72, 62, 40, 50, 38],
-            borderColor: [
-              '#ffc100'
-            ],
-            borderWidth: 2,
-            fill: false,
-            pointBackgroundColor: "#fff"
-          }
         ]
       };
       var options = {
@@ -52,11 +35,11 @@
             ticks: {
               min: 0,
               max: 100,
-              stepSize: 20,
+              stepSize: 5,
               fontColor: "#6c7383",
-              fontSize: 16,
+              fontSize: 14,
               fontStyle: 300,
-              padding: 15
+              padding: 10
             }
           }],
           xAxes: [{
@@ -122,7 +105,7 @@
         labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40'],
         datasets: [
           {
-            label: '2019',
+            label: new Date().getFullYear(),
             data: [42, 42, 30, 30, 18, 22, 16, 21, 22, 22, 22, 20, 24, 20, 18, 22, 30, 34, 32, 33, 33, 24, 32, 34, 30, 34, 19, 34, 18, 10, 22, 24, 20, 22, 20, 21, 10, 10, 5, 9, 14],
             borderColor: [
               'transparent'
@@ -132,7 +115,7 @@
             backgroundColor: "rgba(47,91,191,0.77)"
           },
           {
-            label: '2018',
+            label: new Date().getFullYear() - 1,
             data: [35, 28, 32, 42, 44, 46, 42, 50, 48, 30, 35, 48, 42, 40, 54, 58, 56, 55, 59, 58, 57, 60, 66, 54, 38, 40, 42, 44, 42, 43, 42, 38, 43, 41, 43, 50, 58, 58, 68, 72, 72],
             borderColor: [
               'transparent'
