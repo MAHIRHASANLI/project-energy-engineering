@@ -79,7 +79,8 @@ updateBtn.forEach((btn) => {
 })
 
 
-modalBtn.addEventListener("click", function () {
+modalBtn.addEventListener("click", function (e) {
+    e.preventDefault()
     const newAeek = {
         id: modalBtn.getAttribute("id"),
         projectNumber: document.getElementsByClassName("project-number")[0].value,
@@ -98,7 +99,7 @@ modalBtn.addEventListener("click", function () {
     aeekInNumberTableTbody.innerHTML = '';
     updateTask.forEach((newAeek) => addDateUI(newAeek));
     modal.style.display = "none";
-    // swall
+    // swall;
     SwalFire();
 })
 
@@ -111,3 +112,7 @@ window.addEventListener("click", function (event) {
         modal.style.display = "none";
     }
 })
+
+
+
+

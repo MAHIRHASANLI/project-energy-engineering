@@ -125,7 +125,8 @@ updateBtn.forEach((btn) => {
 })
 
 // Submit -MODAL - Update and Post
-modalBtn.addEventListener("click", function () {
+modalBtn.addEventListener("click", function (e) {
+    e.preventDefault()
     if (modalBtn.className.includes("post")) {
         const newNews = {
             id: Math.round(Math.random() * 99),
