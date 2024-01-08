@@ -1,22 +1,4 @@
 
-const isLoggedIn = true; // Bu değeri oturum durumuna göre güncelleyin
-
-// Sayfa yüklendiğinde kontrolü yap
-window.onload = function () {
-    checkLoginStatus();
-};
-
-// Oturum durumunu kontrol et
-function checkLoginStatus() {
-    if (!isLoggedIn) {
-        // Kullanıcı giriş yapmamışsa, login sayfasına yönlendir
-        window.location.href = '/admin/login/login.html'; // Yönlendirme yapılacak sayfanın yolunu belirtin
-    }
-}
-
-
-
-
 
 
 const aeekInNumberTableTbody = document.querySelector(".aeekInNumber-table--tbody");
@@ -26,33 +8,6 @@ var modal = document.getElementById("myModal");
 var span = document.getElementsByClassName("close")[0];
 const modalBtn = document.querySelector(".modal-btn");
 
-const aeekInNumberArray = [
-    {
-        id: 1,
-        projectNumber: 22,
-        bankFinance: 12,
-        privateFinance: 21,
-        ministry: 14
-    }
-];
-
-
-// addDateUI - UI 
-// { title, text, img, date, id } = newNews
-const addDateUI = (newAeek) => {
-    aeekInNumberTableTbody.innerHTML =
-        `<tr id="${newAeek.id}">
- <td>${newAeek.projectNumber}</td>
- <td>${newAeek.bankFinance}</td>
- <td>${newAeek.privateFinance}</td>
- <td>${newAeek.ministry}</td>
- <td><button type="button" class="btn btn-success update">Update</button></td>
-</tr>`
-}
-
-aeekInNumberArray.forEach((newAeek) => {
-    addDateUI(newAeek)
-})
 
 // postAndUpdateSwal - Swall gosterilmesi
 const SwalFire = () => {
@@ -65,42 +20,123 @@ const SwalFire = () => {
     })
 }
 
+const firebaseConfig = {
+    apiKey: "AIzaSyAHSxYrO-NXOgyhrPAn-yVjsTjcWibKBdk",
+    authDomain: "azerbaijan-energy-engineering.firebaseapp.com",
+    projectId: "azerbaijan-energy-engineering",
+    storageBucket: "azerbaijan-energy-engineering.appspot.com",
+    messagingSenderId: "349375785141",
+    appId: "1:349375785141:web:d62539d0e0ad00865176fc",
+    measurementId: "G-Z2Q2E9GVZ3"
+};
 
-var updateBtn = document.querySelectorAll(".update");
-updateBtn.forEach((btn) => {
-    btn.addEventListener("click", function () {
-        document.getElementsByClassName("project-number")[0].value = this.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
-        document.getElementsByClassName("bank-finance")[0].value = this.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
-        document.getElementsByClassName("private-finance")[0].value = this.parentElement.previousElementSibling.previousElementSibling.textContent;
-        document.getElementsByClassName("ministry")[0].value = this.parentElement.previousElementSibling.textContent;
+firebase.initializeApp(firebaseConfig);
+// Firestore referansı
+const firestore = firebase.firestore();
+// Tüm belgeleri almak için koleksiyon referansı
+const collectionRef = firestore.collection('AEEKinNumbers');
+
+// LOGIN oldugunu yoxlayir
+firebase.auth().onAuthStateChanged((user) => {
+    if (!user) {
+        window.location.href = "/admin/login/login.html";
+    }
+});
+
+// LOGOUT
+const logOutBtn = document.querySelector('.dropdown-item')
+logOutBtn.addEventListener('click', function () {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            await firebase.auth().signOut().then(() => {
+                SwalFire('Səhifədən uğurla çıxdınız!', 'success');
+            }).catch((error) => {
+                SwalFire("Çıxış xətası:", error);
+            });
+        }
+    });
+});
+// addDateUI - UI 
+// { title, text, img, date, id } = newNews
+const addDateUI = (newAeek) => {
+    aeekInNumberTableTbody.innerHTML +=
+        `<tr id="${newAeek.id}">
+ <td>${newAeek.name}</td>
+ <td>${newAeek.number}</td>
+ <td><button type="button" class="btn btn-success update" id="${newAeek.id}">Update</button></td>
+</tr>`
+}
+
+let AEEKinNumbersArray = [];
+const getAllDocuments = async () => {
+    try {
+        const querySnapshot = await collectionRef.get();
+
+        querySnapshot.forEach((doc) => {
+            const data = {
+                name: doc.data().name,
+                number: doc.data().number,
+                id: doc.id
+            }
+            AEEKinNumbersArray.push(data)
+            addDateUI(data)
+        });
+    } catch (error) {
+        console.error('Data çekme hatası:', error);
+    }
+};
+// getAllDocuments fonksiyonunu çağır
+getAllDocuments();
+
+
+
+
+// Update - // Modal acilmasi;
+document.addEventListener('click', function (event) {
+    const clickedBtn = event.target;
+    if (clickedBtn.classList.contains('update')) {
+        document.getElementsByClassName("project-name")[0].value = clickedBtn.parentElement.previousElementSibling.previousElementSibling.textContent;
+        document.getElementsByClassName("project-number")[0].value = clickedBtn.parentElement.previousElementSibling.textContent;
         modal.style.display = "block";
-        modalBtn.setAttribute("id", this.parentElement.parentElement.getAttribute("id"))
-    })
+        modalBtn.setAttribute("id", clickedBtn.getAttribute("id"));
+    }
 })
 
 
-modalBtn.addEventListener("click", function (e) {
-    e.preventDefault()
-    const newAeek = {
-        id: modalBtn.getAttribute("id"),
-        projectNumber: document.getElementsByClassName("project-number")[0].value,
-        bankFinance: document.getElementsByClassName("bank-finance")[0].value,
-        privateFinance: document.getElementsByClassName("private-finance")[0].value,
-        ministry: document.getElementsByClassName("ministry")[0].value
-    };
-
-    const updateTask = aeekInNumberArray.map((item) => {
-        const IdData = modalBtn.getAttribute("id")
-        if (Number(item.id) === Number(IdData)) {
-            return { id: item.id, projectNumber: newAeek.projectNumber, bankFinance: newAeek.bankFinance, privateFinance: newAeek.privateFinance, ministry: newAeek.ministry }
-        };
-        return item;
-    });
-    aeekInNumberTableTbody.innerHTML = '';
-    updateTask.forEach((newAeek) => addDateUI(newAeek));
+modalBtn.addEventListener("click", async function (e) {
+    e.preventDefault();
     modal.style.display = "none";
-    // swall;
-    SwalFire();
+
+    const number = document.getElementsByClassName("project-number")[0].value;
+    const name = document.getElementsByClassName("project-name")[0].value;
+
+    const aeekIdToUpdate = modalBtn.getAttribute("id");
+    //UPDATE FUNKSIYASI
+    try {
+        const documentRef = collectionRef.doc(aeekIdToUpdate);
+        await documentRef.update({ name, number });
+        const updateTask = AEEKinNumbersArray.map((item) => {
+            if (String(item.id) === String(aeekIdToUpdate)) {
+                return { id: item.id, name, number }
+            };
+            return item;
+        });
+        aeekInNumberTableTbody.innerHTML = '';
+        updateTask.forEach((newAeek) => addDateUI(newAeek));
+        // swall;
+        SwalFire('AEEK in Number - yeniləndi.', 'success');
+    }
+    catch (error) {
+        SwalFire('AEEK in Number yenilənmədi.', 'error');
+    }
 })
 
 span.addEventListener("click", function () {

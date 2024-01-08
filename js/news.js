@@ -36,7 +36,6 @@ newsObjects.reverse();
 
 
 newsObjects.forEach((element) => {
-  console.log(element);
   const newsDiv = document.createElement("div");
   newsDiv.className = "news";
 

@@ -25,3 +25,16 @@ $('.partnersSection').owlCarousel({
         }
     }
 });
+
+
+
+// partnerUserPageUI.innerHTML += `<div class="item">
+// <div class="partnersSection-item">
+//    <a href="">
+//     <img src=${newPartner.img} alt=${newPartner.name}>
+//     <div class="portners-count">
+//       <h6>${newPartner.name}</h6>
+//     </div>
+//    </a>
+// </div>
+// </div>`;

@@ -47,13 +47,13 @@
 
           <li class="nav-item nav-profile dropdown">
             <a href="login/login.html" class="nav-profile-name">Login</a>
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
-              <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                <a class="dropdown-item">
-                  <i class="mdi mdi-logout text-primary"></i>
-                  Logout
-                </a>
-              </div>
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown"></a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+              <a class="dropdown-item">
+                <i class="mdi mdi-logout text-primary"></i>
+                Logout
+              </a>
+            </div>
           </li>
         </ul>
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
@@ -130,11 +130,9 @@
                     <table id="recent-purchases-listing" class="table">
                       <thead>
                         <tr>
-                          <th>Project Number</th>
-                          <th>Bank Finance</th>
-                          <th>Private Finance</th>
-                          <th>Ministry</th>
-                          <th class="text-success">Update</th>
+                          <th>Adı</th>
+                          <th>sayı</th>
+                          <th class="text-success">Güncəllə</th>
                         </tr>
                       </thead>
                       <tbody class="aeekInNumber-table--tbody">
@@ -153,13 +151,8 @@
           <!-- Modal content -->
           <form class="modal-content">
             <span class="close">&times;</span>
-            <input class="project-number" type="Update project number" placeholder="Update project number"
-              title="add text">
-            <input class="bank-finance" type="text" placeholder="Update bank finance" title="Update bank finance">
-
-            <input class="private-finance" type="text" placeholder="Update private finance"
-              title="Update private finance">
-            <input class="ministry" type="text" title="Update ministry" placeholder="Update ministry">
+            <input class="project-name" type="text" placeholder="Adını yeniləyin" title="add text">
+            <input class="project-number" type="text" placeholder="Sayını yeniləyin" title="add number">
             <button title="Submit" type="submit" class="modal-btn">Submit</button>
           </form>
         </div>
@@ -190,6 +183,13 @@
   <!-- Active Link -->
   <script src="javascript/active-template.js"></script>
 
+  <!-- Firebase App -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <!-- Firebase Firestore -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <!-- Firebase Authentication -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <!-- /admin-aeek-number -->
   <script src="javascript/admin-aeek-number.js"></script>
 </body>
 
