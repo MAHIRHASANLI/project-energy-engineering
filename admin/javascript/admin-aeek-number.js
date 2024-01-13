@@ -1,3 +1,4 @@
+import { UpdateAEEKinNumbers, getAllAEEKinNumbers } from "../api/aeek_in_number_request.js";
 
 
 
@@ -18,52 +19,9 @@ const SwalFire = () => {
         showConfirmButton: false,
         timer: 1500
     })
-}
-
-const firebaseConfig = {
-    apiKey: "AIzaSyAHSxYrO-NXOgyhrPAn-yVjsTjcWibKBdk",
-    authDomain: "azerbaijan-energy-engineering.firebaseapp.com",
-    projectId: "azerbaijan-energy-engineering",
-    storageBucket: "azerbaijan-energy-engineering.appspot.com",
-    messagingSenderId: "349375785141",
-    appId: "1:349375785141:web:d62539d0e0ad00865176fc",
-    measurementId: "G-Z2Q2E9GVZ3"
 };
 
-firebase.initializeApp(firebaseConfig);
-// Firestore referansı
-const firestore = firebase.firestore();
-// Tüm belgeleri almak için koleksiyon referansı
-const collectionRef = firestore.collection('AEEKinNumbers');
 
-// LOGIN oldugunu yoxlayir
-firebase.auth().onAuthStateChanged((user) => {
-    if (!user) {
-        window.location.href = "/admin/login/login.html";
-    }
-});
-
-// LOGOUT
-const logOutBtn = document.querySelector('.dropdown-item')
-logOutBtn.addEventListener('click', function () {
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
-    }).then(async (result) => {
-        if (result.isConfirmed) {
-            await firebase.auth().signOut().then(() => {
-                SwalFire('Səhifədən uğurla çıxdınız!', 'success');
-            }).catch((error) => {
-                SwalFire("Çıxış xətası:", error);
-            });
-        }
-    });
-});
 // addDateUI - UI 
 // { title, text, img, date, id } = newNews
 const addDateUI = (newAeek) => {
@@ -75,28 +33,15 @@ const addDateUI = (newAeek) => {
 </tr>`
 }
 
+
+// Get All Data
 let AEEKinNumbersArray = [];
-const getAllDocuments = async () => {
-    try {
-        const querySnapshot = await collectionRef.get();
-
-        querySnapshot.forEach((doc) => {
-            const data = {
-                name: doc.data().name,
-                number: doc.data().number,
-                id: doc.id
-            }
-            AEEKinNumbersArray.push(data)
-            addDateUI(data)
-        });
-    } catch (error) {
-        console.error('Data çekme hatası:', error);
-    }
-};
-// getAllDocuments fonksiyonunu çağır
-getAllDocuments();
-
-
+getAllAEEKinNumbers().then((aeek) => {
+    aeek.forEach((res) => {
+        AEEKinNumbersArray.push(res);
+        addDateUI(res);
+    })
+});
 
 
 // Update - // Modal acilmasi;
@@ -118,13 +63,13 @@ modalBtn.addEventListener("click", async function (e) {
     const number = document.getElementsByClassName("project-number")[0].value;
     const name = document.getElementsByClassName("project-name")[0].value;
 
-    const aeekIdToUpdate = modalBtn.getAttribute("id");
+    const IdData = modalBtn.getAttribute("id");
     //UPDATE FUNKSIYASI
     try {
-        const documentRef = collectionRef.doc(aeekIdToUpdate);
-        await documentRef.update({ name, number });
+        await UpdateAEEKinNumbers({ name, number }, IdData);
+
         const updateTask = AEEKinNumbersArray.map((item) => {
-            if (String(item.id) === String(aeekIdToUpdate)) {
+            if (String(item.id) === String(IdData)) {
                 return { id: item.id, name, number }
             };
             return item;
@@ -135,7 +80,7 @@ modalBtn.addEventListener("click", async function (e) {
         SwalFire('AEEK in Number - yeniləndi.', 'success');
     }
     catch (error) {
-        SwalFire('AEEK in Number yenilənmədi.', 'error');
+        SwalFire(`${error}: AEEK in Number yenilənmədi.`, 'error');
     }
 })
 

@@ -1,5 +1,7 @@
+import { PostNews, UpdateNews, deleteNews, getAllNews } from "../api/news_required.js";
+
 // Submit -MODAL
-const modalBtn = document.querySelector(".modal-btn");
+const modalBtn = document.getElementById("modal-btn");
 // Get the modal
 var modal = document.getElementById("myModal");
 var span = document.getElementsByClassName("close")[0];
@@ -15,50 +17,7 @@ const SwalFire = (swalContent, icon) => {
   });
 };
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAHSxYrO-NXOgyhrPAn-yVjsTjcWibKBdk",
-  authDomain: "azerbaijan-energy-engineering.firebaseapp.com",
-  projectId: "azerbaijan-energy-engineering",
-  storageBucket: "azerbaijan-energy-engineering.appspot.com",
-  messagingSenderId: "349375785141",
-  appId: "1:349375785141:web:d62539d0e0ad00865176fc",
-  measurementId: "G-Z2Q2E9GVZ3"
-};
 
-firebase.initializeApp(firebaseConfig);
-// Firestore referansı
-const firestore = firebase.firestore();
-// Tüm belgeleri almak için koleksiyon referansı
-const collectionRef = firestore.collection('news');
-
-// LOGIN OLUB OLMADIGINI SORUSUR
-firebase.auth().onAuthStateChanged((user) => {
-  if (!user) {
-    window.location.href = "/admin/login/login.html";
-  }
-});
-
-// LOGOUT
-const logOutBtn = document.querySelector('.dropdown-item')
-logOutBtn.addEventListener('click', function () {
-  Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, delete it!",
-  }).then(async (result) => {
-    if (result.isConfirmed) {
-      await firebase.auth().signOut().then(() => {
-        SwalFire('Səhifədən uğurla çıxdınız!', 'success');
-      }).catch((error) => {
-        SwalFire("Çıxış xətası:", error);
-      });
-    }
-  });
-})
 
 // addDateUI - UI
 // { title, text, img, date, id } = newNews
@@ -78,27 +37,13 @@ const addDateUI = (newNews) => {
 
 // Get All Data
 let newsArray = [];
-const getAllDocuments = async () => {
-  try {
-    const querySnapshot = await collectionRef.get();
+getAllNews().then((news) => {
+  news.forEach((res) => {
+    newsArray.push(res)
+    addDateUI(res)
+  })
+});
 
-    querySnapshot.forEach((doc) => {
-      const data = {
-        title: doc.data().title,
-        text: doc.data().text,
-        date: doc.data().date,
-        img: doc.data().img,
-        id: doc.id
-      }
-      newsArray.push(data)
-      addDateUI(data)
-    });
-  } catch (error) {
-    console.error('Data çekme hatası:', error);
-  }
-};
-// getAllDocuments fonksiyonunu çağır
-getAllDocuments();
 
 // Delete request
 document.addEventListener("click", function (event) {
@@ -106,7 +51,7 @@ document.addEventListener("click", function (event) {
     const deleteBtn = event.target;
     const fileElement = deleteBtn.parentElement.previousElementSibling.previousElementSibling;
     const thisDataName = fileElement.textContent.trim();
-    const partnerIdToDelete = deleteBtn.getAttribute('id');
+    const news_Id = deleteBtn.getAttribute('id');
 
     Swal.fire({
       title: "Are you sure?",
@@ -119,12 +64,11 @@ document.addEventListener("click", function (event) {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const documentRef = collectionRef.doc(partnerIdToDelete);
-          await documentRef.delete();
+          await deleteNews(news_Id);
           fileElement.parentElement.remove();
           SwalFire(`${thisDataName} - adlı Partnyor silindi.`, 'success');
         } catch (error) {
-          SwalFire('silinmə uğursuz oldu.', 'error');
+          SwalFire(`${error}: silinmə uğursuz oldu.`, 'error');
         }
       }
     });
@@ -150,10 +94,10 @@ document.addEventListener("click", function (event) {
     const clickedBtn = event.target;
 
     if (clickedBtn.classList.contains('update')) {
-      document.getElementsByClassName("image")[0].value =
-        clickedBtn.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.children[0].getAttribute("src");
       document.getElementsByClassName("title")[0].value =
         clickedBtn.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
+      document.getElementsByClassName("image")[0].value =
+        clickedBtn.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.children[0].getAttribute("src");
       document.getElementsByClassName("text")[0].value =
         clickedBtn.parentElement.previousElementSibling.previousElementSibling.textContent;
       document.getElementsByClassName("date")[0].value =
@@ -178,14 +122,15 @@ modalBtn.addEventListener("click", async function (e) {
     const date = document.getElementsByClassName("date")[0].value;
     const text = document.getElementsByClassName("text")[0].value;
 
-    // POST FUNKSIYASI
     try {
-      const docRef = await collectionRef.add({ title, img, date, text });
-      addDateUI({ title, img, date, text, id: docRef.id });
-      newsArray.push({ title, img, date, text, id: docRef.id })
+      // POST FUNKSIYASI
+      const res = await PostNews({ title, img, date, text });
+
+      addDateUI({ title, img, date, text, id: res.id });
+      newsArray.push({ title, img, date, text, id: res.id })
       SwalFire(`${title} - əlavə olundu.`, 'success');
     } catch (error) {
-      SwalFire(`${title} əlavə olunmadı:`, 'error');
+      SwalFire(`${error}: ${title} əlavə olunmadı:`, 'error');
     }
 
   } else if (modalBtn.className.includes("update")) {
@@ -196,12 +141,12 @@ modalBtn.addEventListener("click", async function (e) {
     const date = document.getElementsByClassName("date")[0].value;
     const text = document.getElementsByClassName("text")[0].value;
 
-    const newIdToUpdate = modalBtn.getAttribute("id");
+    const IdData = modalBtn.getAttribute("id");
     try {
-      const documentRef = collectionRef.doc(newIdToUpdate);
-      await documentRef.update({ title, img, date, text });
+      await UpdateNews({ title, img, date, text }, IdData);
+
       const updateTask = newsArray.map((item) => {
-        if (String(item.id) === String(newIdToUpdate)) {
+        if (String(item.id) === String(IdData)) {
           return { id: item.id, title, img, date, text }
         }
         return item;
@@ -211,10 +156,11 @@ modalBtn.addEventListener("click", async function (e) {
       // swall
       SwalFire(`${title} - yeniləndi.`, 'success');
     } catch (error) {
-      SwalFire(`${title} yenilənmədi.`, 'error');
+      SwalFire(`${error}: ${title} yenilənmədi.`, 'error');
     }
   } else console.error("Invalid data");
 });
+
 
 span.addEventListener("click", function () {
   modal.style.display = "none";

@@ -1,3 +1,8 @@
+
+import { PostPartner, UpdatePartner, deletePartner, getAllPartners } from '../api/partner_request.js'
+
+
+
 const SwalFire = (swalContent, icon) => {
   Swal.fire({
     position: "center",
@@ -7,53 +12,6 @@ const SwalFire = (swalContent, icon) => {
     timer: 1500,
   });
 };
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAHSxYrO-NXOgyhrPAn-yVjsTjcWibKBdk",
-  authDomain: "azerbaijan-energy-engineering.firebaseapp.com",
-  projectId: "azerbaijan-energy-engineering",
-  storageBucket: "azerbaijan-energy-engineering.appspot.com",
-  messagingSenderId: "349375785141",
-  appId: "1:349375785141:web:d62539d0e0ad00865176fc",
-  measurementId: "G-Z2Q2E9GVZ3"
-};
-
-firebase.initializeApp(firebaseConfig);
-// Firestore referansı
-const firestore = firebase.firestore();
-
-// LOGIN oldugunu yoxlayir
-firebase.auth().onAuthStateChanged((user) => {
-  if (!user) {
-    window.location.href = "/admin/login/login.html";
-  }
-});
-
-// LOGOUT
-const logOutBtn = document.querySelector('.dropdown-item')
-logOutBtn.addEventListener('click', function () {
-  Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, delete it!",
-  }).then(async (result) => {
-    if (result.isConfirmed) {
-      await firebase.auth().signOut().then(() => {
-        SwalFire('Səhifədən uğurla çıxdınız!', 'success');
-      }).catch((error) => {
-        SwalFire("Çıxış xətası:", error);
-      });
-    }
-  });
-});
-
-
-// Tüm belgeleri almak için koleksiyon referansı
-const collectionRef = firestore.collection('partners');
 
 const partnerAdminPageUI = document.querySelector(".partner-table--tbody");
 const addDateUI = (newPartner) => {
@@ -65,67 +23,23 @@ const addDateUI = (newPartner) => {
     </tr>`;
 };
 
-// Get All Data
+// // Get All Data
 let partnerArray = [];
-const getAllDocuments = async () => {
-  try {
-    const querySnapshot = await collectionRef.get();
-
-    querySnapshot.forEach((doc) => {
-      const data = {
-        name: doc.data().name,
-        img: doc.data().img,
-        id: doc.id
-      }
-      partnerArray.push(data)
-      addDateUI(data)
-    });
-  } catch (error) {
-    console.error('Data çekme hatası:', error);
-  }
-};
-// getAllDocuments fonksiyonunu çağır
-getAllDocuments();
+getAllPartners().then((partners) => {
+  partners.forEach((res) => {
+    partnerArray.push(res)
+    addDateUI(res)
+  })
+})
 
 
-// firebase.initializeApp(firebaseConfig);
-// const db = firebase.firestore();
-// const docRef = db.collection('partners')
-// addDateUI - UI
-
-// Gett - Data;
-// export const getAllPartners = () => {
-
-// getDocs(colPartner).then((querySnapshot) => {
-//   querySnapshot.docs.forEach((doc) => {
-//     const data = {
-//       name: doc.data().name,
-//       img: doc.data().img,
-//       id: doc.id
-//     }
-//     partnerArray.push(data)
-//     addDateUI(data)
-//     // console.log(doc);
-//     // console.log(doc.id, " =>dddee ", doc.data());
-//   });
-//   // partnerArray = querySnapshot.docs
-//   // partnerArray.forEach((partner) => {
-//   //     addDateUI(partner)
-//   // })
-// }).catch((error) => {
-//   console.error("Yenede Error!: ", error);
-// });
-
-// postAndUpdateSwal - Swall gosterilmesi
-
-
-// Delete - Data;
+// // Delete - Data;
 document.addEventListener("click", function (event) {
   if (event.target.classList.contains("remove")) {
     const deleteBtn = event.target;
     const fileElement = deleteBtn.parentElement.previousElementSibling.previousElementSibling;
     const thisDataName = fileElement.textContent.trim();
-    const partnerIdToDelete = deleteBtn.getAttribute('id');
+    const partner_Id = deleteBtn.getAttribute('id');
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -138,25 +52,21 @@ document.addEventListener("click", function (event) {
       if (result.isConfirmed) {
         // Koleksiyon referansı ve belge referansı
         try {
-          const documentRef = collectionRef.doc(partnerIdToDelete);
-          await documentRef.delete();
+          await deletePartner(partner_Id);
           fileElement.parentElement.remove();
           SwalFire(`${thisDataName} - adlı Partnyor silindi.`, 'success');
         } catch (error) {
-          SwalFire('silinmə uğursuz oldu.', 'error');
+          SwalFire(`${error}: Silinmə uğursuz oldu.`, 'error');
         }
       }
     });
   }
 });
 
-
-
-
-// Get the modal
+// // Get the modal
 const modal = document.getElementById("myModal");
 
-// Submit -MODAL
+// // Submit -MODAL
 const modalBtn = document.querySelector(".modal-btn");
 
 // Post - // Modal acilmasi;
@@ -169,7 +79,7 @@ postBtn.addEventListener("click", function () {
   modal.style.display = "block";
 });
 
-// Update - // Modal acilmasi;
+// // Update - // Modal acilmasi;
 document.addEventListener("click", function (event) {
   const clickedBtn = event.target;
 
@@ -183,7 +93,7 @@ document.addEventListener("click", function (event) {
   }
 });
 
-// Modal baglanmasi
+// // Modal baglanmasi
 const span = document.getElementsByClassName("close")[0];
 span.addEventListener("click", function () {
   modal.style.display = "none";
@@ -195,6 +105,8 @@ window.addEventListener("click", function (event) {
   }
 });
 
+
+//POST VE UPDATE
 modalBtn.addEventListener("click", async function (e) {
   // Firestore'daki 'cities' koleksiyonunu temsil eden bir referans alın
   e.preventDefault();
@@ -202,27 +114,26 @@ modalBtn.addEventListener("click", async function (e) {
     modal.style.display = "none";
     const name = document.getElementsByClassName("name")[0].value;
     const img = document.getElementsByClassName("image")[0].value;
-    // POST FUNKSIYASI
     try {
-      const docRef = await collectionRef.add({ name, img });
-      addDateUI({ name, img, id: docRef.id });
-      partnerArray.push({ name, img, id: docRef.id })
+      // POST FUNKSIYASI
+      const res = await PostPartner({ name, img });
+      addDateUI({ name, img, id: res.id });
+      partnerArray.push({ name, img, id: res.id })
       SwalFire(`${name} - adlı partnyor əlavə olundu.`, 'success');
     } catch (error) {
-      SwalFire("Partnyor əlavə olunmadı:", 'error');
+      SwalFire(`${error}: Partnyor əlavə olunmadı:`, 'error');
     }
   } else if (modalBtn.className.includes("update")) {
     modal.style.display = "none";
     const name = document.getElementsByClassName("name")[0].value;
     const img = document.getElementsByClassName("image")[0].value;
 
-    const partnerIdToUpdate = modalBtn.getAttribute("id");
-    //UPDATE FUNKSIYASI
+    const IdData = modalBtn.getAttribute("id");
     try {
-      const documentRef = collectionRef.doc(partnerIdToUpdate);
-      await documentRef.update({ name, img });
+      //UPDATE FUNKSIYASI
+      await UpdatePartner({ name, img }, IdData);
       const updateTask = partnerArray.map((item) => {
-        if (String(item.id) === String(partnerIdToUpdate)) {
+        if (String(item.id) === String(IdData)) {
           return { id: item.id, name, img };
         }
         return item;
@@ -231,9 +142,7 @@ modalBtn.addEventListener("click", async function (e) {
       updateTask.forEach((partner) => addDateUI(partner));
       SwalFire(`${name} - partnyor yeniləndi.`, 'success');
     } catch (error) {
-      SwalFire('Partnyor yenilənmədi.', 'error');
+      SwalFire(`${error}: Partnyor yenilənmədi.`, 'error');
     }
   } else console.error("Invalid data");
 });
-
-
