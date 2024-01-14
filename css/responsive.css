@@ -280,6 +280,9 @@
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
+  .iframe-footer {
+    margin-top: 50px;
+  }
   .menu_text li {
     font-size: 0.8rem !important;
   }
@@ -908,6 +911,9 @@
   }
 }
 @media (max-width: 850px) {
+  .iframe-footer {
+    margin-top: 50px;
+  }
   .header_section {
     padding-top: 10px;
     padding-bottom: 10px;

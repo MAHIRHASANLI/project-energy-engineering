@@ -16,11 +16,11 @@ export const firestore = firebase.firestore();
 
 
 // LOGIN oldugunu yoxlayir
-firebase.auth().onAuthStateChanged((user) => {
-    if (!user) {
-        window.location.href = "/admin/login/login.html";
-    }
-});
+// firebase.auth().onAuthStateChanged((user) => {
+//     if (!user) {
+//         window.location.href = "/admin/login/login.html";
+//     }
+// });
 
 
 const SwalFire = (swalContent, icon) => {

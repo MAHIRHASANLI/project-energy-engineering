@@ -42,3 +42,5 @@ export const UpdatePartner = async ({ name, img }, id) => {
     const documentRef = Collection_Partners.doc(id);
     await documentRef.update({ name, img });
 };
+
+

@@ -44,3 +44,4 @@ export const UpdateNews = async ({ title, img, date, text }, id) => {
     const documentRef = Collection_News.doc(id);
     await documentRef.update({ title, img, date, text });
 };
+

@@ -1,6 +1,11 @@
 import { UpdateAEEKinNumbers, getAllAEEKinNumbers } from "../api/aeek_in_number_request.js";
 
-
+// LOGIN oldugunu yoxlayir
+firebase.auth().onAuthStateChanged((user) => {
+    if (!user) {
+        window.location.href = "/admin/login/login.html";
+    }
+});
 
 const aeekInNumberTableTbody = document.querySelector(".aeekInNumber-table--tbody");
 
@@ -9,6 +14,28 @@ var modal = document.getElementById("myModal");
 var span = document.getElementsByClassName("close")[0];
 const modalBtn = document.querySelector(".modal-btn");
 
+// // // LOGOUT
+const logOutBtn = document.querySelector('.dropdown-item')
+logOutBtn.addEventListener('click', function () {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            await firebase.auth().signOut().then(() => {
+                SwalFire('Log Out successfully!', 'success');
+            }).catch((error) => {
+                SwalFire(`${error}:log Out error!!`, 'error');
+
+            });
+        }
+    });
+});
 
 // postAndUpdateSwal - Swall gosterilmesi
 const SwalFire = () => {
@@ -29,7 +56,7 @@ const addDateUI = (newAeek) => {
         `<tr id="${newAeek.id}">
  <td>${newAeek.name}</td>
  <td>${newAeek.number}</td>
- <td><button type="button" class="btn btn-success update" id="${newAeek.id}">Update</button></td>
+ <td><button type="button" class="btn btn-success update" id="${newAeek.id}">Güncəllə</button></td>
 </tr>`
 }
 

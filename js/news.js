@@ -1,77 +1,75 @@
-
-var screenWidth = window.innerWidth;
-
-var newWidth = screenWidth * 0.40;
-var newsCardWidth = screenWidth * 0.90;
+import { getAllNews } from "../admin/api/news_required.js";
 
 
-var newWidthInPx = Math.floor(newWidth) + 'px';
-const newsCards = document.querySelector(".newsCards")
-const newsContainer = document.querySelector(".newsContainer")
+const SwiperConfig = () => {
+  new Swiper(".news-slider", {
+    slidesPerView: 2,
+    spaceBetween: 30,
+    loop: true,
+    loopFillGroupWithBlank: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false
+    },
+    speed: 1500,
+    pagination: {
+      el: ".swiper-pagination",
+      type: "fraction",
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+      0: {
+        slidesPerView: 1
+      },
+      760: {
+        slidesPerView: 2
+      }
+    }
+  });
 
-const rightBtn = document.getElementById("right")
+}
 
-const leftBtn = document.getElementById("left")
+let newsObjects = [];
 
-
-newsContainer.style.width = newsCardWidth + "px"
-newsCards.style.width = newsCardWidth + "px"
-
-let newsObjects = [
-  { title: "Xəbər 1", text: "This is the text for news 1.", img: "./images/technology-trend-freepik-1647963838.jpg", date: "10/06/2023" },
-  { title: "Xəbər 2", text: "This is the text for news 2.", img: "./images/Brad-Blog-Aus-Header-scaled.jpg", date: "10/06/2023" },
-  { title: "Xəbər 3", text: "This is the text for news 3.", img: "./images/Tech_4x3_608.jpg", date: "8/06/2023" },
-  { title: "Xəbər 4", text: "This is the text for news 4.", img: "./images/images.jpg", date: "10/06/2023" },
-  { title: "Xəbər 5", text: "This is the text for news 5.", img: "./images/download.jpg", date: "9/06/2023" },
-  { title: "Xəbər 6", text: "This is the text for news 6.", img: "./images/Surveillance-State_QBS_Drones-technology-and-apps_Featured.webp", date: "10/06/2023" },
-];
-
-newsObjects.sort((a, b) => {
-  const dateA = new Date(a.date);
-  const dateB = new Date(b.date);
-  return dateA - dateB;
-});
-
-newsObjects.reverse();
-
-
-newsObjects.forEach((element) => {
-  const newsDiv = document.createElement("div");
-  newsDiv.className = "news";
-
-  newsDiv.style.minWidth = newWidthInPx
-
-  const newsImgDiv = document.createElement("img");
-  newsImgDiv.className = "newsImg";
-  newsImgDiv.src = element.img;
-
-  const newsTextDiv = document.createElement("div");
-  newsTextDiv.className = "newsText";
-
-  const paragraph = document.createElement("p");
-  paragraph.textContent = element.title; // Use the title from the newsObjects array
-
-  // Append the paragraph to the newsTextDiv
-  newsTextDiv.appendChild(paragraph);
+const sliderWrapperNews = document.getElementById('slider-wrapper-news')
+const addDateUI = (news) => {
+  sliderWrapperNews.innerHTML += `
+  <div class="news swiper-slide">
+  <img src=${news.img} alt=${news.title} class="newsImg">
+  <div class="newsText">
+     <p>${news.title}</p>
+  </div>
+  <div class="newsDate">${news.date}</div>
+</div>`
+};
 
 
-  const newsDateDiv = document.createElement("div");
-  newsDateDiv.className = "newsDate";
-  newsDateDiv.textContent = "Date: " + element.date;
 
-  // Append the newsImgDiv and newsTextDiv to the main newsDiv
-  newsDiv.appendChild(newsImgDiv);
-  newsDiv.appendChild(newsTextDiv);
-  newsDiv.appendChild(newsDateDiv);
-
-  // Append the main newsDiv to the body of the document
-  newsCards.appendChild(newsDiv);
-  // Attach the click event handler to the newsCards container
-
-
+// Get All Data
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    await getAllNews().then(async (news) => {
+      news.sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return dateA - dateB;
+      });
+      news.reverse();
+      news.forEach((res) => {
+        addDateUI(res);
+        newsObjects.push(res)
+      });
+      await SwiperConfig();
+    });
+  } catch (error) {
+    console.error(error);
+  }
 })
 
-newsCards.addEventListener("click", (event) => {
+document.addEventListener("click", function (event) {
   const clickedNewsDiv = event.target.closest(".news");
   if (!clickedNewsDiv) {
     return;
@@ -127,91 +125,3 @@ newsCards.addEventListener("click", (event) => {
     }
   });
 });
-
-
-
-
-
-
-
-
-
-
-let scrollInterval;
-
-function scrollRight() {
-  const elementRect = newsCards.getBoundingClientRect();
-  const isVisible = elementRect.left < window.innerWidth && elementRect.right > 0;
-
-  if (isVisible) {
-    const scrollAmount = newsCards.scrollLeft + newWidth;
-
-    if (scrollAmount >= newsCards.scrollWidth - newsCards.clientWidth) {
-      newsCards.scrollTo({
-        left: 0,
-        behavior: 'smooth'
-      });
-    } else {
-      newsCards.scrollTo({
-        left: scrollAmount,
-        behavior: 'smooth'
-      });
-    }
-  }
-}
-
-
-function scrollLeft() {
-  const elementRect = newsCards.getBoundingClientRect();
-  const isVisible = elementRect.right < window.innerWidth && elementRect.left > 0;
-
-  if (isVisible) {
-    const scrollAmount = newsCards.scrollLeft - newWidth;
-
-    if (scrollAmount >= newsCards.scrollWidth - newsCards.clientWidth) {
-      newsCards.scrollTo({
-        left: 0,
-        behavior: 'smooth'
-      });
-    } else {
-      newsCards.scrollTo({
-        left: scrollAmount,
-        behavior: 'smooth'
-      });
-    }
-  }
-}
-
-
-
-
-rightBtn.addEventListener("click", () => {
-  scrollRight()
-})
-leftBtn.addEventListener("click", () => {
-  scrollLeft()
-})
-
-const observer = new IntersectionObserver((entries) => {
-  const isVisible = entries[0].isIntersecting;
-  if (isVisible) {
-    clearInterval(scrollInterval);
-    scrollInterval = setInterval(scrollRight, 5000);
-  }
-});
-
-newsCards.addEventListener('scroll', () => {
-  clearInterval(scrollInterval);
-  scrollInterval = setInterval(scrollRight, 5000);
-});
-
-newsCards.addEventListener('click', () => {
-  clearInterval(scrollInterval);
-  scrollInterval = setInterval(scrollRight, 5000);
-});
-
-observer.observe(newsCards);
-
-const maxIterations = 10;
-let iterations = 0;
-

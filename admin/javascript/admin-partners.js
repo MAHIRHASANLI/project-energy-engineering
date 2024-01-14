@@ -1,7 +1,35 @@
 
 import { PostPartner, UpdatePartner, deletePartner, getAllPartners } from '../api/partner_request.js'
 
+// LOGIN oldugunu yoxlayir
+firebase.auth().onAuthStateChanged((user) => {
+  if (!user) {
+    window.location.href = "/admin/login/login.html";
+  }
+});
 
+// // // LOGOUT
+const logOutBtn = document.querySelector('.dropdown-item')
+logOutBtn.addEventListener('click', function () {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      await firebase.auth().signOut().then(() => {
+        SwalFire('Log Out successfully!', 'success');
+      }).catch((error) => {
+        SwalFire(`${error}:log Out error!!`, 'error');
+
+      });
+    }
+  });
+});
 
 const SwalFire = (swalContent, icon) => {
   Swal.fire({
@@ -18,8 +46,8 @@ const addDateUI = (newPartner) => {
   partnerAdminPageUI.innerHTML += `<tr id="${newPartner.id}">
        <td><img src="${newPartner.img}" alt="${newPartner.name}"/></td>
        <td>${newPartner.name}</td>
-       <td><button type="button" class="btn btn-success update" id=${newPartner.id}>Update</button></td>
-       <td><button type="button" class="btn btn-danger remove" id=${newPartner.id}>Delete</button></td>
+       <td><button type="button" class="btn btn-success update" id=${newPartner.id}>Güncəllə</button></td>
+       <td><button type="button" class="btn btn-danger remove" id=${newPartner.id}>Sil</button></td>
     </tr>`;
 };
 

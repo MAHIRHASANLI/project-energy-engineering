@@ -26,6 +26,10 @@
    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
    <!-- Tweaks for older IEs-->
    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+
+   <!-- Swiper CSS -->
+   <!-- swiper CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-bundle.min.css" rel="stylesheet">
    <!-- owl stylesheets -->
    <link rel="stylesheet" href="./css/news.css">
    <link rel="stylesheet" href="./css/footer.css">
@@ -75,7 +79,7 @@
          </div>
 
          <div class="naw-hamburger" onclick="openNav()">
-            <img src="images/toggle.png" class="toggle_menu" alt="haburger menu">
+            <img src="images/responsive_navbar-img.png" class="toggle_menu" alt="haburger menu">
          </div>
       </div>
    </div>
@@ -256,41 +260,28 @@
          <div class="projectText">
             <h2>PARTNERS </h2>
             <hr>
-            <div class="owl-carousel owl-theme partnersSection">
-               <div class="item">
-                  <div class="partnersSection-item">
-                     <a href="">
-                        <img src=${newPartner.img} alt=${newPartner.name}>
-                        <div class="portners-count">
-                           <h6>${newPartner.name}</h6>
-                        </div>
-                     </a>
-                  </div>
+            <div class="partners-slider swiper">
+               <div class="swiper-wrapper" id="slider-wrapper-partners">
+
                </div>
-               <div class="item">
-                  <div class="partnersSection-item">
-                     <a href="">
-                        <img src=${newPartner.img} alt=${newPartner.name}>
-                        <div class="portners-count">
-                           <h6>${newPartner.name}</h6>
-                        </div>
-                     </a>
-                  </div>
-               </div>`
             </div>
          </div>
       </div>
    </div>
 
-   <!-- banner section end -->
    <!-- news section start -->
    <div id="news" class="news_section">
       <div class="newsContainer">
          <h2>NEWS</h2>
          <hr>
-         <i id="left" class="arrow left fa-solid fa-chevron-left"></i>
-         <i id="right" class="arrow right fa-solid fa-chevron-right"></i>
-         <div class="newsCards">
+
+         <div class="news-slider swiper">
+            <div class="swiper-wrapper" id="slider-wrapper-news">
+
+            </div>
+
+            <div class="swiper-button-next swiper-navBtn"></div>
+            <div class="swiper-button-prev swiper-navBtn"></div>
          </div>
       </div>
    </div>
@@ -329,27 +320,26 @@
                   </div>
                </div>
                <div class="footer-sosical">
-                  <li><a href="#"><img src="images/fb-icon.png"></a></li>
-                  <li><a href="#"><img src="images/twitter-icon.png"></a></li>
-                  <li><a href="#"><img src="images/in-icon.png"></a></li>
-                  <li><a href="#"><img src="images/instagram-icon.png"></a></li>
+                  <li><a href="#"><i class="fa-brands fa-facebook-f sosical-icon"></i></a></li>
+                  <li><a href="#"><i class="fa-brands fa-x-twitter sosical-icon"></i></a></li>
+                  <li><a href="#"><i class="fa-brands fa-linkedin-in sosical-icon"></i></a></li>
+                  <li><a href="#"><i class="fa-brands fa-instagram sosical-icon"></i></a></li>
                </div>
             </div>
-            <div id="contact" class="contact_section col-xs-12 col-sm-12 col-md8 col-lg-8">
-               <div class="container-fluid">
-                  <iframe
-                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d194473.6400915442!2d49.543125883782956!3d40.39443523494604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d6bd6211cf9%3A0x343f6b5e7ae56c6b!2zQmFrxLE!5e0!3m2!1saz!2saz!4v1694797748958!5m2!1saz!2saz"
-                     width="100%" style="border:0; min-height: 500px;" allowfullscreen="" loading="lazy"
-                     referrerpolicy="no-referrer-when-downgrade"></iframe>
-               </div>
+            <div class="iframe-footer col-xs-12 col-sm-12 col-md8 col-lg-8">
+               <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d194473.6400915442!2d49.543125883782956!3d40.39443523494604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d6bd6211cf9%3A0x343f6b5e7ae56c6b!2zQmFrxLE!5e0!3m2!1saz!2saz!4v1694797748958!5m2!1saz!2saz"
+                  width="100%" style="border:0; min-height: 500px;" allowfullscreen="" loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
          </div>
       </div>
       <!-- footer section end -->
 
+
       <!-- Javascript files-->
 
-      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script> -->
+
       <script src="js/jquery.min.js"></script>
       <script src="js/popper.min.js"></script>
       <script src="js/bootstrap.bundle.min.js"></script>
@@ -367,15 +357,16 @@
       <!-- Firebase Authentication -->
       <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
       <!-- Partners JS -->
-      <script src="./js/partners.js"></script>
+      <script type="module" src="./js/partners.js"></script>
       <!-- <script src="./admin/javascript/admin-partners.js"></script> -->
       <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
       <!-- Baxis sayi -->
       <!-- <script src="admin/javascript/admin-dashboard.js"></script> -->
-
+      <!-- Swiper JS -->
+      <script src="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-bundle.min.js"></script>
       <!-- <script src="js/statistic.js"></script> -->
-      <script src="js/aeek-in-number.js"></script>
-      <script src="./js/news.js"></script>
+      <script type="module" src="js/aeek-in-number.js"></script>
+      <script type="module" src="./js/news.js"></script>
       <script type="module" src="./js/statistic.js"></script>
 
 
@@ -398,18 +389,18 @@
       </script>
 
       <script>
-         const navbar = document.querySelector(".header_section")
+         // const navbar = document.querySelector(".header_section")
          // Window Scroll Navbar
-         window.onscroll = function () { scrollFunction() };
+         // window.onscroll = function () { scrollFunction() };
 
-         function scrollFunction() {
-            if (document.body.scrollTop > 650 || document.documentElement.scrollTop > 650) {
-               navbar.style.position = "sticky";
-               navbar.style.top = "0";
-               navbar.style.transition = "1s"
-            }
-            else navbar.style.position = "relative";
-         }
+         // function scrollFunction() {
+         // if (document.body.scrollTop > 650 || document.documentElement.scrollTop > 650) {
+         //    navbar.style.position = "sticky";
+         //    navbar.style.top = "0";
+         //    navbar.style.transition = "1s"
+         // }
+         // else navbar.style.position = "relative";
+         // }
 
          function openNav() {
             document.getElementById("myNav").style.width = "100%";

@@ -1065,24 +1065,60 @@ hr {
   gap: 30px;
 }
 
-#partners .partnersSection {
-  padding-top: 40px;
-}
-
-#partners .partnersSection .partnersSection-item {
-  width: 150px;
-}
-
-#partners .partnersSection img {
+#partners .partners-slider {
   width: 100%;
+  padding: 20px 0;
+  overflow: hidden;
 }
 
-#partners .partnersSection .portners-count {
-  padding-top: 5px;
+.card.swiper-slide {
+  padding: 15px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: 0.3s linear;
+}
+
+.card.swiper-slide:hover {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.card.swiper-slide .card-content {
+  width: 100%;
+  margin-top: 10px;
   text-align: center;
 }
 
-.portners-count h6 {
+.card.swiper-slide .name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  transition: color 0.3s linear;
+}
+
+.card.swiper-slide .name:hover {
+  color: #e05306;
+}
+
+.image-content {
+  position: relative;
+  height: 130px;
+  width: 130px;
+  border-radius: 50%;
+  background-color: #fff;
+  padding: 3px;
+}
+
+.card-image .card-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #4070f4;
+}
+
+.partners-slider .portners-count h6 {
   font-weight: 500;
   font-size: 14px;
   transition: linear 0.3s all;
@@ -1305,16 +1341,18 @@ hr {
 .aeekContainer .aeek-item {
   margin-top: 30px;
   border: 2px solid white;
-  border-bottom: 2px solid #e05306;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  /* border-bottom: 2px solid #e05306; */
   cursor: pointer;
   transition: 0.3s all;
   padding: 40px 20px;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 .aeekContainer .aeek-item:hover {
-  border: 2px solid #e05306;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  /* border: 1px solid #e05306;
+  border-bottom: 2px solid #e05306; */
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .aeekContainer .aeek-item p,

@@ -1,5 +1,12 @@
 import { PostNews, UpdateNews, deleteNews, getAllNews } from "../api/news_required.js";
 
+// LOGIN oldugunu yoxlayir
+firebase.auth().onAuthStateChanged((user) => {
+  if (!user) {
+    window.location.href = "/admin/login/login.html";
+  }
+});
+
 // Submit -MODAL
 const modalBtn = document.getElementById("modal-btn");
 // Get the modal
@@ -19,6 +26,28 @@ const SwalFire = (swalContent, icon) => {
 
 
 
+// // // LOGOUT
+const logOutBtn = document.querySelector('.dropdown-item')
+logOutBtn.addEventListener('click', function () {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      await firebase.auth().signOut().then(() => {
+        SwalFire('Log Out successfully!', 'success');
+      }).catch((error) => {
+        SwalFire(`${error}:log Out error!!`, 'error');
+
+      });
+    }
+  });
+});
 // addDateUI - UI
 // { title, text, img, date, id } = newNews
 const newsTableTbody = document.querySelector(".news-table--tbody");
@@ -30,8 +59,8 @@ const addDateUI = (newNews) => {
      <td>${newNews.title}</td>
      <td>${newNews.text}</td>
      <td>${newNews.date}</td>
-     <td><button type="button" class="btn btn-success update" id=${newNews.id}>Update</button></td>
-     <td><button type="button" class="btn btn-danger remove" id=${newNews.id}>Delete</button></td>
+     <td><button type="button" class="btn btn-success update" id=${newNews.id}>Güncəllə</button></td>
+     <td><button type="button" class="btn btn-danger remove" id=${newNews.id}>Sil</button></td>
     </tr>`;
 };
 

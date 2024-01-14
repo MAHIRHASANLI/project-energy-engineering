@@ -45,7 +45,7 @@
 .footer-sosical {
   margin-top: 60px;
   display: flex;
-  justify-content: space-between;
+  gap: 40px;
   align-items: center;
   width: 70%;
 }
@@ -211,6 +211,14 @@ div[class*="-stats"] span:hover {
   opacity: 0;
   animation: showlines 0.6s linear 1.6s;
   animation-fill-mode: forwards;
+}
+
+.sosical-icon {
+  font-size: 22px;
+}
+
+.sosical-icon:hover {
+  color: #e05306 !important;
 }
 
 @keyframes showlines {

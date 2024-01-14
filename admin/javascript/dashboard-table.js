@@ -11,7 +11,7 @@
         labels: ["1", "2", "3", "4"],
         datasets: [
           {
-            label: 'Viewing statistics by month',
+            label: 'Aylar üzrə statistik məlumatlara baxmaq',
             data: [27, 35, 30, 40, 52, 48, 54, 46, 70],
             borderColor: [
               '#ff4747'
@@ -125,7 +125,7 @@
             backgroundColor: "rgba(77,131,255,0.77)"
           },
           {
-            label: 'Past years',
+            label: 'Keçmiş illər',
             data: [98, 88, 92, 90, 98, 98, 90, 92, 78, 88, 84, 76, 80, 72, 74, 74, 88, 80, 72, 62, 62, 72, 72, 78, 78, 72, 75, 78, 68, 68, 60, 68, 70, 75, 70, 80, 82, 78, 78, 84, 82],
             borderColor: [
               'transparent'
