@@ -159,10 +159,10 @@
   .sporrt_text {
     margin-top: 0px;
   }
-  #main_slider a.carousel-control-prev {
+  .banner_section .swiper-button-prev {
     display: none;
   }
-  #main_slider a.carousel-control-next {
+  .banner_section .swiper-button-next {
     display: none;
   }
   .navbar-expand-lg .navbar-nav .nav-link {
@@ -218,11 +218,11 @@
   .taital_main {
     margin-top: 65px;
   }
-  #carouselExampleIndicators a.carousel-control-prev {
+  .banner_section .swiper-button-prev {
     left: 35px;
     top: 110px;
   }
-  #carouselExampleIndicators a.carousel-control-next {
+  .banner_section .swiper-button-next {
     left: 35px;
     top: 210px;
   }
@@ -306,15 +306,15 @@
   .info_icon {
     min-width: 10%;
   }
-  #main_slider a.carousel-control-prev {
-    display: none;
+  .banner_section .swiper-button-prev {
+    display: none !important;
   }
   .btn_main {
     margin-top: 58px;
     width: 65%;
   }
-  #main_slider a.carousel-control-next {
-    display: none;
+  .banner_section .swiper-button-next {
+    display: none !important;
   }
   .sporrt_text {
     margin-top: 0px;
@@ -374,11 +374,11 @@
   .round {
     display: none;
   }
-  #carouselExampleIndicators a.carousel-control-prev {
+  .banner_section .swiper-button-prev {
     left: 8px;
     top: 80px;
   }
-  #carouselExampleIndicators a.carousel-control-next {
+  .banner_section .swiper-button-next {
     left: 8px;
     top: 150px;
   }
@@ -464,21 +464,31 @@
     font-size: 42px;
     display: block;
   }
-  #main_slider a.carousel-control-prev {
+  .banner_section .swiper-button-prev,
+  .banner_section .swiper-button-next {
+    width: 50px;
+    height: 50px;
+  }
+  .banner_section .swiper-button-next::after,
+  .banner_section .swiper-button-prev::after {
+    font-size: 30px;
+    font-weight: 400;
+  }
+  .banner_section .swiper-button-prev {
     position: absolute;
     left: 25%;
-    top: 64%;
+    top: 34% !important;
+    display: none;
+  }
+  .banner_section .swiper-button-next {
+    position: absolute;
+    left: 50px;
+    top: 58% !important;
     display: none;
   }
   .btn_main {
     margin-top: 58px;
     width: 80%;
-  }
-  #main_slider a.carousel-control-next {
-    position: absolute;
-    left: 50px;
-    top: 64%;
-    display: none;
   }
   .btn-primary {
     margin-top: 0px;
@@ -545,11 +555,8 @@
   .get_bt {
     display: none;
   }
-  #carouselExampleIndicators a.carousel-control-prev {
-    left: 0%;
-    top: 25px;
-  }
-  #carouselExampleIndicators a.carousel-control-next {
+
+  .banner_section .swiper-button-next {
     left: 0px;
     top: 125px;
   }
@@ -592,7 +599,7 @@
   }
   .client_lorem_text {
     width: 90%;
-    font-size: 14px;
+    font-size: 16px !important;
     left: 45px;
     padding-top: 30px;
   }
@@ -637,6 +644,10 @@
   .copyright_text {
     margin-left: 0px;
     font-size: 16px;
+  }
+
+  .lorem_text {
+    display: none;
   }
 }
 
@@ -700,18 +711,7 @@
     padding-bottom: 30px;
     width: 55%;
   }
-  #main_slider a.carousel-control-prev {
-    position: absolute;
-    left: 175px;
-    top: 90%;
-    display: none;
-  }
-  #main_slider a.carousel-control-next {
-    position: absolute;
-    left: 236px;
-    top: 90%;
-    display: none;
-  }
+
   .titlepage h2::after {
     width: 93%;
   }
@@ -784,11 +784,11 @@
   .get_bt {
     display: none;
   }
-  #carouselExampleIndicators a.carousel-control-prev {
+  .banner_section .swiper-button-prev {
     left: -2%;
     top: 225px;
   }
-  #carouselExampleIndicators a.carousel-control-next {
+  .banner_section .swiper-button-next {
     left: 0%;
     top: 300px;
   }
@@ -884,19 +884,26 @@
     margin-left: 0px;
     font-size: 14px;
   }
-  .carousel-control-prev {
-    position: absolute;
-    left: 260px !important;
-    top: 105px !important;
-    height: 40px !important;
-    width: 40px !important;
+
+  .banner_section .swiper-button-prev,
+  .banner_section .swiper-button-next {
+    width: 45px;
+    height: 45px;
   }
-  .carousel-control-next {
+  .banner_section .swiper-button-next::after,
+  .banner_section .swiper-button-prev::after {
+    font-size: 24px;
+    font-weight: 400;
+  }
+  .banner_section .swiper-button-prev {
     position: absolute;
-    left: 270px !important;
-    top: 155px !important;
-    height: 40px !important;
-    width: 40px !important;
+    right: 18% !important;
+    top: 45px !important;
+  }
+  .banner_section .swiper-button-next {
+    position: absolute;
+    right: 12% !important;
+    top: 105px !important;
   }
 }
 
@@ -953,18 +960,24 @@
   #partners .partnersSection .partnersSection-item h6 {
     font-size: 12px;
   }
-  .carousel-control-prev {
-    position: absolute;
-    left: 230px !important;
-    top: 45px !important;
-    height: 40px !important;
-    width: 40px !important;
+  .banner_section .swiper-button-prev,
+  .banner_section .swiper-button-next {
+    width: 45px;
+    height: 45px;
   }
-  .carousel-control-next {
+  .banner_section .swiper-button-next::after,
+  .banner_section .swiper-button-prev::after {
+    font-size: 22px;
+    font-weight: 400;
+  }
+  .banner_section .swiper-button-prev {
     position: absolute;
-    left: 250px !important;
-    top: 95px !important;
-    height: 40px !important;
-    width: 40px !important;
+    left: 75% !important;
+    top: 45px !important;
+  }
+  .banner_section .swiper-button-next {
+    position: absolute;
+    left: 78% !important;
+    top: 105px !important;
   }
 }

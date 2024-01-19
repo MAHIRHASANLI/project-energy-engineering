@@ -24382,3 +24382,8 @@ img.logo-img {
 .input-group {
   background-color: #ececec !important;
 }
+
+.navbar .mdi.mdi-sort-variant {
+  color: white !important;
+  z-index: 99;
+}
