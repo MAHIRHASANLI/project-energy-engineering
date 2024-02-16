@@ -505,9 +505,10 @@ button {
 .fact_text {
   width: 100%;
   float: left;
-  font-size: 18px;
+  font-size: 16px;
   color: #090a0b;
   margin-left: 0px;
+  padding: 0;
   text-align: center !important;
 }
 
@@ -994,6 +995,7 @@ hr {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: auto;
 }
 
 .containerSevices .button:hover {
@@ -1360,5 +1362,3 @@ hr {
   color: #e05306;
   font-size: 34px;
 }
-
-/* ........... */

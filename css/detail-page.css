@@ -1,0 +1,112 @@
+body {
+  margin: 0;
+}
+
+.header-area a {
+  text-decoration: none;
+  transition: linear 0.3s all;
+}
+
+.header-area a:hover {
+  color: #333;
+}
+
+.header-area {
+  background-color: transparent;
+  background: linear-gradient(to top, #0000006e, #0001007f),
+    url("https://www.onisep.fr/var/onisep/storage/images/3/2/8/5/9565823-5-fre-FR/4d04693191ae-ingenieur-e-du-BTP.jpg")
+      center/cover;
+  background-position: center;
+  height: 45vh;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* pages */
+.pages {
+  text-align: center;
+  margin: 50px 0;
+}
+
+.pages-head h2 {
+  color: #212529;
+  font-size: 35px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  margin: 60px 0 40px 0;
+  color: RGB(224, 83, 6);
+}
+
+.services-count {
+  width: 90%;
+  margin: auto;
+  text-align: start;
+}
+
+.pages-head p {
+  line-height: 20px;
+  margin-top: 20px;
+  color: #212529;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.pages-photos {
+  padding-top: 50px;
+}
+
+.pages-photos img {
+  max-width: 302px;
+  height: 302px;
+  object-fit: cover;
+}
+
+/* page info */
+.page-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  height: 40vh;
+}
+
+.page-info h2 {
+  font-size: 40px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  color: #fff;
+  border-bottom: 1px solid #ffffff4d;
+  width: 95%;
+  margin: 80px auto 20px auto;
+}
+
+.page-link {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 20px;
+  width: 95%;
+  /* margin: 20px auto 20px auto; */
+}
+
+.page-link span,
+.anasehife {
+  font-size: 15px;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 300;
+}
+
+.geriqayit {
+  color: #ffffff7a;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 500px) {
+  .pages-photos img {
+    margin-top: 20px;
+    width: 90%;
+  }
+}
